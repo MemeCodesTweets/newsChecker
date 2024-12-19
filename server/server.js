@@ -1,3 +1,11 @@
+
+
+// this is using OPENAI - CHATGPT API
+
+
+
+
+
 // Use CommonJS syntax for OpenAI
 const OpenAI = require('openai').OpenAI;
 const express = require('express');

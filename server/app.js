@@ -1,3 +1,9 @@
+
+
+// THIS IS USING PERPLEXITY API
+// -->  currently working here
+
+
 const express = require("express");
 const axios = require("axios");
 const dotenv = require("dotenv");
