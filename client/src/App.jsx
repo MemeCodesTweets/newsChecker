@@ -6,7 +6,6 @@ function App() {
 
   return (
     <>
-        hii
         <NewsCheck></NewsCheck>
     </>
   )
