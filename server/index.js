@@ -11,14 +11,38 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+const Exa =  require("exa-js").default; 
+const exa = new Exa(process.env.EXA_API_KEY)
+
+async function getSummaryFromUrl(url) {
+  try {
+    const results = await exa.getContents([url], {
+      summary: true
+    });
+    
+    if (results.results && results.results.length > 0 && results.results[0].summary) {
+      return results.results[0].summary;
+    } else {
+      return "Summary not available";
+    }
+  } catch (error) {
+    console.error("Error fetching summary:", error);
+    return "Error fetching summary";
+  }
+}
+
+
 async function askPerplexity(inputUrl) {
+
+  const response = await getSummaryFromUrl(inputUrl);
+
   const url = 'https://api.perplexity.ai/chat/completions';
   
   const data = {
     model: 'llama-3.1-sonar-small-128k-online',
     messages: [
       { role: 'system',content: `Be concise and precise.` },
-      { role: 'user', content: `Hi, Please provide summary for the shared url : ${inputUrl}.` }
+      { role: 'user', content: `Hi, Here is a possible summary for the article. Can you search and find out if the fact is correct. : ${response}.` }
     ]
   };
 
@@ -29,7 +53,6 @@ async function askPerplexity(inputUrl) {
         Accept: 'application/json'
       }
     });
-    console.log(response.data)
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error('Error:', error.message);
