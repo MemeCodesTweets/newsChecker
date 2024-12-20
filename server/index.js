@@ -21,7 +21,6 @@ async function getSummaryFromUrl(url) {
         });
 
         if (results.results && results.results.length > 0 && results.results[0].summary) {
-            console.log(results.results[0].summary)
             return results.results[0].summary;
         } else {
             console.log("summary not found")
@@ -58,7 +57,6 @@ async function askPerplexity(inputUrl) {
                 Accept: 'application/json'
             }
         });
-        console.log(response.data);
 
         if(response.status == 500)
             return "ERROR";
@@ -87,5 +85,5 @@ app.get('/api/perplexity', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server is running`);
 });
