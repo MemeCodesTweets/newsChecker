@@ -39,7 +39,7 @@ function InputField() {
         setLoading(true);
 
         try {
-            const res = await fetch(`http://localhost:3000/api/perplexity?question=${encodeURIComponent(inputValue)}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/perplexity?question=${encodeURIComponent(inputValue)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
