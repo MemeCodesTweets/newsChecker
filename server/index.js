@@ -46,7 +46,11 @@ async function askPerplexity(inputUrl) {
         model: 'llama-3.1-sonar-small-128k-online',
         messages: [
             { role: 'system', content: `Be concise and precise.` },
-            { role: 'user', content: `Hi, Here is a possible summary for the article. Can you search and find out if the fact is correct. : ${response}.Note that, the summary should be of a news, if it is anything else, give no as answer. Also, give first word of the answer as yes or no, depending upon the truthness of the news` }
+            { role: 'user', content: `Hi, Here is a possible summary for the article: ${response}. Can you verify if this is correct? Please note:
+                The URL must point to a specific news article, not a general website or a home page of any site (e.g., homepages like facebook.com, google.com, or ndtv.com).
+                If the URL is not a specific news article, return 'No.'
+                If the URL leads to a news article but the information is incorrect, return 'No.'
+                Only return 'Yes' if the URL leads to a specific news article and the information is verified as correct. Ensure the first word of your response is either 'Yes' or 'No' based on these conditions.` }
         ]
     };
 
