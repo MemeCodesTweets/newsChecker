@@ -92,7 +92,7 @@ app.get('/api/query', async (req, res) => {
                             choices: [
                                 {
                                     message: {
-                                        content: "Yes, the entered URL is valid and represents the intended news AI checker platform.",
+                                        content: "Yes, the entered URL is valid and represents the intended news AI checker platform. Very smart though!",
                                     },
                                 },
                             ],
