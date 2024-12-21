@@ -78,10 +78,10 @@ function InputField() {
     };
 
     return (
-        <div className="min-h-screen overflow-hidden bg-gradient-to-br">
+        <div className="h-screen overflow-hidden bg-gradient-to-br">
             <StackedNotifications notification={notification} setNotification={setNotification} />
 
-            <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-8 lg:px-12">
+            <div className="h-screen w-full flex flex-col items-center justify-center px-4 sm:px-8 lg:px-12">
                 {loading ? (
                     <div className="w-full sm:w-3/4 md:w-2/3 p-4 bg-zinc-900 border border-white rounded-md shadow-md animate-pulse">
                         <div className="animate-pulse">
