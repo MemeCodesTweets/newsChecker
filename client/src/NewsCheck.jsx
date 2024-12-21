@@ -151,7 +151,7 @@ function InputField() {
                 )}
             </div>
 
-            <div className="absolute bottom-0 w-full py-4 px-4 flex justify-center">
+            <div className="fixed bottom-0 w-full py-4 px-4 flex justify-center">
                 <InputFor onSearch={handleSearch} isSearchEnabled={!loading} />
             </div>
         </div>
