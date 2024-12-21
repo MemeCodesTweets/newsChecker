@@ -62,9 +62,7 @@ const Cursor = ({ hovered, scope }) => {
       initial={false}
       animate={{
         opacity: hovered ? 1 : 0,
-        transform: `scale(${
-          hovered ? 1 : 0
-        }) translateX(-50%) translateY(-50%)`,
+        transform: `scale(${hovered ? 1 : 0}) translateX(-50%) translateY(-50%)`,
       }}
       transition={{ duration: 0.15 }}
       ref={scope}
@@ -114,6 +112,19 @@ const TextLink = ({ text, onClick }) => {
   );
 };
 
+const ExternalLink = ({ href, text }) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-white/90 transition-colors hover:text-white"
+    >
+      {text}
+    </a>
+  );
+};
+
 const Buttons = ({ setMenuOpen }) => (
   <div className="flex items-center gap-4">
     <button
@@ -137,30 +148,12 @@ const Buttons = ({ setMenuOpen }) => (
   </div>
 );
 
-const SignInButton = () => {
-  return (
-    <button className="group relative scale-100 overflow-hidden rounded-lg px-4 py-2 transition-transform hover:scale-105 active:scale-95">
-      <span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-        Sign in
-      </span>
-      <span className="absolute inset-0 z-0 bg-gradient-to-br from-white/20 to-white/5 opacity-0 transition-opacity group-hover:opacity-100" />
-    </button>
-  );
-};
-
 const MobileMenu = ({ menuOpen, setMenuOpen, navigate }) => {
   const [ref, { height }] = useMeasure();
-  
-  // Define the routes for the menu links dynamically
-  const links = [
-    { text: "Home", onClick: () => navigateAndCloseMenu("/") },
-    { text: "Upcoming", onClick: () => navigateAndCloseMenu("/Upcoming") },
-    { text: "About", onClick: () => navigateAndCloseMenu("/About") }
-  ];
 
   const navigateAndCloseMenu = (path) => {
-    navigate(path);  // Navigate to the route
-    setMenuOpen(false);  // Close the menu
+    navigate(path); // Navigate to the route
+    setMenuOpen(false); // Close the menu
   };
 
   return (
@@ -171,16 +164,12 @@ const MobileMenu = ({ menuOpen, setMenuOpen, navigate }) => {
       }}
       className="block overflow-hidden md:hidden"
     >
-      <div ref={ref} className="flex items-center justify-between px-4 pb-4">
-        <div className="flex items-center gap-4">
-          {links.map((link) => (
-            <TextLink 
-              key={link.text} 
-              text={link.text} 
-              onClick={link.onClick} 
-            />
-          ))}
-        </div>
+      <div ref={ref} className="flex flex-col items-start gap-4 px-4 pb-4">
+        <TextLink text="Home" onClick={() => navigateAndCloseMenu("/")} />
+        <TextLink text="Upcoming" onClick={() => navigateAndCloseMenu("/Upcoming")} />
+        <TextLink text="About" onClick={() => navigateAndCloseMenu("/About")} />
+        <ExternalLink href="#" text="Twitter" />
+        <ExternalLink href="#" text="Buy $Check" />
       </div>
     </motion.div>
   );
