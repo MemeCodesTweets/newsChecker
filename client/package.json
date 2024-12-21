@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "react-use-measure": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.1",
     "@react-three/fiber": "^8.17.10",
     "@types/three": "^0.171.0",
