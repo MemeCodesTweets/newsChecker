@@ -74,7 +74,7 @@ async function askPerplexity(inputUrl) {
     }
 }
 
-app.get('/api/perplexity', async (req, res) => {
+app.get('/api/query', async (req, res) => {
     try {
         const { question } = req.query;
         if (!question) {
