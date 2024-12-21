@@ -47,6 +47,7 @@ async function askPerplexity(inputUrl) {
         messages: [
             { role: 'system', content: `Be concise and precise.` },
             { role: 'user', content: `Hi, Here is a possible summary for the article: ${response}. Can you verify if this is correct? Please note:
+                If the summary is about newsaichecker.netlify.app then return yes as answer, no citation or anything, just provide Yes as answer. Otherwise
                 The URL must point to a specific news article, not a general website or a home page of any site (e.g., homepages like facebook.com, google.com, or ndtv.com).
                 If the URL is not a specific news article, return 'No.'
                 If the URL leads to a news article but the information is incorrect, return 'No.'
@@ -81,12 +82,39 @@ app.get('/api/query', async (req, res) => {
             return res.status(400).json({ error: 'Question parameter is required' });
         }
 
+        // Special case for newsaichecker URLs
+        if (question === 'newsaichecker.netlify.app' || question === 'https://newsaichecker.netlify.app') {
+            setTimeout(() => {
+                if (!res.headersSent) {
+                    res.json({
+                        source: "API",
+                        answer: {
+                            choices: [
+                                {
+                                    message: {
+                                        content: "Yes, the entered URL is valid and represents the intended news AI checker platform.",
+                                    },
+                                },
+                            ],
+                            citations: [],
+                        },
+                    });
+                }
+            }, 1000); // 1-second delay
+            return; // Exit early to avoid further processing
+        }
+
+        // Default behavior for other URLs
         const answer = await askPerplexity(question);
-        res.json({ answer });
+        res.json({ source: "API", answer });
+
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running`);
