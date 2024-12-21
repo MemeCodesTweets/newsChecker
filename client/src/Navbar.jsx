@@ -153,10 +153,15 @@ const MobileMenu = ({ menuOpen, setMenuOpen, navigate }) => {
   
   // Define the routes for the menu links dynamically
   const links = [
-    { text: "Home", onClick: () => navigate("/") },
-    { text: "Upcoming", onClick: () => navigate("/Upcoming") },
-    { text: "About", onClick: () => navigate("/About") }
+    { text: "Home", onClick: () => navigateAndCloseMenu("/") },
+    { text: "Upcoming", onClick: () => navigateAndCloseMenu("/Upcoming") },
+    { text: "About", onClick: () => navigateAndCloseMenu("/About") }
   ];
+
+  const navigateAndCloseMenu = (path) => {
+    navigate(path);  // Navigate to the route
+    setMenuOpen(false);  // Close the menu
+  };
 
   return (
     <motion.div
