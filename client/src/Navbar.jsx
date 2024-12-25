@@ -127,17 +127,23 @@ const ExternalLink = ({ href, text }) => {
 
 const Buttons = ({ setMenuOpen }) => (
   <div className="flex items-center gap-4">
-    <button
+    <a
+      href="https://x.com/Fact_CheckAI" // Replace with the actual Twitter URL
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative hidden md:block scale-100 overflow-hidden rounded-lg bg-gradient-to-br from-indigo-600 from-40% to-indigo-400 px-5 py-3 font-medium text-white transition-transform hover:scale-105 active:scale-95"
     >
       <FiTwitter />
-    </button>
+    </a>
 
-    <button
+    <a
+      href="https://example.com/buy" // Replace with the actual Buy $Check link
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative hidden md:block scale-100 overflow-hidden rounded-lg bg-gradient-to-br from-indigo-600 from-40% to-indigo-400 px-4 py-2 font-medium text-white transition-transform hover:scale-105 active:scale-95"
     >
       Buy $Check
-    </button>
+    </a>
 
     <button
       onClick={() => setMenuOpen((prev) => !prev)}
@@ -168,7 +174,7 @@ const MobileMenu = ({ menuOpen, setMenuOpen, navigate }) => {
         <TextLink text="Home" onClick={() => navigateAndCloseMenu("/")} />
         <TextLink text="Upcoming" onClick={() => navigateAndCloseMenu("/Upcoming")} />
         <TextLink text="About" onClick={() => navigateAndCloseMenu("/About")} />
-        <ExternalLink href="#" text="Twitter" />
+        <ExternalLink href="https://x.com/Fact_CheckAI" text="Twitter" />
         <ExternalLink href="#" text="Buy $Check" />
       </div>
     </motion.div>
